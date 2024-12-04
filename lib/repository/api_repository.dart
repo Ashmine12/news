@@ -21,7 +21,6 @@ class NewsService {
     final response = await http.get(uri);
 
     if (response.statusCode == 200) {
-      // Decode the response body
       Map<String, dynamic> data = jsonDecode(response.body);
 
       // Filter out articles with '[Removed]' in the title
@@ -29,7 +28,6 @@ class NewsService {
         return article['title'] != null && !article['title'].contains('[Removed]');
       }).toList();
 
-      // Convert each article to NewsArticle model
       return filteredArticles.map((article) => NewsArticle.fromJson(article)).toList();
     } else {
       throw Exception('Failed to load news');
