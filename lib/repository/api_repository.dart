@@ -12,7 +12,8 @@ class NewsService {
     final queryParameters = {
       'category': category,
       'page': page.toString(),
-      'apiKey': '2ba6d0adc1ff4c6c9644e4b51d92aeed',
+      //we need to change apikey after 100 api request
+      'apiKey': '32eb19e35dcf43568c3938307e992067',
       'q': keyword,
     };
 
