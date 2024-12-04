@@ -43,29 +43,32 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Scaffold(
         appBar: AppBar(
           title: isSearching
-              ? TextField(
-                  controller: searchController,
-                  decoration: const InputDecoration(
-                    hintText: 'Search news...',
-                    hintStyle: TextStyle(color: Colors.black),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(20),
+              ? SizedBox(
+            height: 45,
+                child: TextField(
+                    controller: searchController,
+                    decoration: const InputDecoration(
+                      hintText: 'Search news...',
+                      hintStyle: TextStyle(color: Colors.black),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(20),
+                        ),
                       ),
                     ),
+                    style: const TextStyle(color: Colors.black),
+                    onSubmitted: (value) {
+                      newsController.searchKeyword.value = value;
+                      newsController.fetchNews(
+                          category: newsController.selectedCategory.value,
+                          page: 1,
+                          keyword: value);
+                      setState(() {
+                        isSearching = false;
+                      });
+                    },
                   ),
-                  style: const TextStyle(color: Colors.black),
-                  onSubmitted: (value) {
-                    newsController.searchKeyword.value = value;
-                    newsController.fetchNews(
-                        category: newsController.selectedCategory.value,
-                        page: 1,
-                        keyword: value);
-                    setState(() {
-                      isSearching = false;
-                    });
-                  },
-                )
+              )
               : const Text('News'),
           actions: [
             IconButton(
